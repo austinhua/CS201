@@ -1,0 +1,12 @@
+Name: Austin Hua
+NetID: ah335
+Consulted with: Paul Cruz, Jeff Forbes
+
+Reading Code
+2. Why is the output printed in sorted order?
+The map is implemented through a tree map, which automatically sorts the keys. Since the keys are strings, it sorts them in alphabetical order.
+3. How does the method printResults work for any kind of map
+printResults only requires that the key be a string. The value returned by the key can be any object. printResults then calls toString() on the object, and every object has some kind of toString() method.
+
+Part 4 - For each word, in a set of files, what are the locations of the word?
+Suppose you want to create an inverted index, mapping from words to their locations in a set of documents. Describe how you would create this structure. What are the types of the value and key in your map? How do you create this map?

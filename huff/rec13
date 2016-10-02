@@ -1,0 +1,43 @@
+1. An array of 20,000 strings should take 400 seconds while an array of 1,000 strings should take 1 second,
+since insertion sort is O(n^2).
+
+2. Overall the method is O(n^2), and there are 4 arrays of 2000 each, which should take around 4 seconds each,
+resulting in a total time of 16 seconds.
+
+3. For small sub-arrays, insertion sort is better since it is O(n) in the best case, and small sub-arrays
+are more likely to be in order already, which is the best case for insertion sort.
+
+4. An inefficiennt sort might be used if you know part of the list is already sorted.
+
+5. The worst case of bubble sort is O(n^2), and it is likely to be the worst case with a million integers.
+Instead, an algorithm with a guaranteed O(nlogn) would be better.
+
+6. The complexity would be O(nlogn) because inserting and sorting would take O(nlogn) if the array list
+is in random order.
+If the list is already sorted, the complexity would be O(n^2) because all entries would be added
+to a certain side, so the tree would in reality be a linked list.
+
+7. Once you find the middle, you run mergeSort again on the left and right side. The recurrence would be
+T(n) = 2T(n/2) + O(n), so it would be O(nlogn),
+
+8. Make an array of size max.
+Go through the list to get the frequencies of each element of  array, and at the index equal to the
+element value, store the frequency of that element.
+Iterate through the original array and go through the freq array as well, and put each index value of the freq
+array into the original array as many times as the value at the index.
+
+9. There's a max integer value, but if you have a really big compressed file and there are more bits than the
+max integer, you are unable to use this method. The limit is the value of the max integer, which is 2^31 - 1.
+To get around this limit, you could store the size as a long or anything else that can store a greater value.
+
+10. a) The path describes the sequence of traversals down the tree from root, where 0 represents going on the
+left side of the tree and 1 represents going on the right side of the tree.
+
+b) createCodings(root.left, path + "0") and createCodings(root.right, path + "1").
+
+c) 
+Check if the root has left or right children. If not, it is a leaf and you add it to the map.
+
+11. Go through myFreqs and for each integer look up its coding in myCodes and the length of that coding its
+the bits used for that integer. If you multipy the size by the frequency and add it to a cumulative sum,
+the result will be the total size.

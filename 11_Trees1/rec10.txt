@@ -1,0 +1,106 @@
+http://www.cs.duke.edu/courses/compsci201/fall14/rec/1031/
+
+1. FRUIT SALAD ITERATIVE
+public static int fruitCounter(ListNode list) {
+int counter = 0;
+while(list != null) {
+	if (is(Fruit(list.info))
+		counter ++;
+	list = list.next;
+}
+}
+
+FRUIT SALAD RECURSIVE
+public static int fruitCounter(ListNode list) {
+int counter = 0;
+if (list == null) return 0;
+if (isFruit(list.info)) counter++;
+counter += fruitCounter(list.next);
+return counter;
+}
+
+2. OCCURS CHECK
+public static boolean hasDuplicates(ListNode list) {
+	if (list == null) return false;
+	if (countOccurrences(list, list.info) > 1) return true;
+	hasDuplicates(list.next);
+}
+
+b. The complexity is O(Nˆ2). countOccurences has complexity O(N) because it goes 
+	through the entire list, and in the worst case,it is called N times by hasDuplicates 
+	as it goes along the entire list, resulting in O(N^2).
+	
+c. A more efficient solution to hasDuplicates would be to use a HashMap<String, Integer>, 
+	and instead of using countOccurences on a string, you could just check if it was already in
+	the map, and if not, adding it in. This uses O(1) to check, instead of O(N) for countOccurences,
+	so the complexity of the solution would only be O(N) because it will recurse N times in the worst case.
+	
+3. ISOMORPHIC TREES
+a.
+public static boolean isIsomorphic(Treenode s, TreeNode t) {
+	if (s == null || t == null) {
+		if (s == null && t == null) 
+			return true;
+		else 
+			return false;
+	}
+	return isIsomorphic(s.left, t.left) && isIsomorphic(s.right, t.right);
+}
+
+The big-Oh running time is O(n) because whenever two trees are isomorphic the method will traverse
+	through all nodes of each tree. There are n/2 nodes in each tree, and O(1/2n) the same as O(n).
+
+b.	
+public static boolean isQuasiIsomorphic(TreeNode s, TreeNode t) {
+	if (s == null || t == null) {
+		if (s == null && t == null) 
+			return true;
+		else 
+			return false;
+	}
+	return (isQuasiIsomorphic(s.left, t.left) && isQuasiIsomorphic(s.right, t.right)) ||
+			(is QuasiIsomorphic(s.right, t.left) && isQuasiIsomorphic(s.left, t.right))
+}
+	
+The big-Oh running time is O(n^2) because instead of making 2^(logn) = n traversals of the tree as in
+	isIsomorphic, isQuasiIsomorphic makes 4^(logn) = n^2 traversals of the tree.
+	
+4. TREETOLIST REVISITED
+a.
+T(n) = 2T(n/2) + O(n/2) 	Calls treeToList on the left and right nodes, which are 1/2 the height.
+							In addition, iterates through half of its nodes, the left side of the tree, 
+							before it reaches the current node, which requires O(n/2) running time.
+	 = 2(2T(n/4) + O(n/4)) + O(n/2) = 4T(n/4) + O(n/2) + O(n/2) = 4T(n/4) + 2*O(n/2)
+T(n) = kT(n/k) + log(k)O(n/2)
+T(n) = nT(1) + log(n)O(n/2)
+	 = O(n) + O(nlogn)
+	 = O(nlogn)
+	 
+b. 
+The method works similarly to a. except it creates a list from the right side of the tree to the left,
+and instead of forgetting the previous node and having to iterate through to find it each time, it
+remembers the next node and just creates a listNode that points to the next node, removing the need
+to iterate through all previous nodes on the left side, making it more efficient.
+The big-Oh running time is O(n) because it goes through all n nodes, adding them to a list, without
+having to iterate through all previous left side nodes, which was what took nlogn time.
+
+5. FIND KTH
+a. 
+count(t.left) takes O(n/2) time assuming n is the number of nodes in the tree starting at t because
+it traverses through all nodes on the left side. The method only chooses to go down one child tree
+or the other.
+
+T(n) = T(n/2) + O(n/2)
+	 = T(n/4) + O(n/4) + O(n/2)
+	 = T(n/k) + O(n*(1/2)^k + ... + n*(1/2)^1)
+	 = T(1)   + O(n*(1/2)^n + ... + n*(1/2)^1)
+	 = O(n)
+
+b.
+assuming the tree is made completely of left child nodes,
+T(n) = T(n-1) + O(n)
+	 = T(n-2) + O(n-1) + O(n)
+	 = T(n-k) + O(n-k) + ... + O(n)
+	 = T(1) + O(1) + ... + O(n)
+	 = O(N^2)
+	
